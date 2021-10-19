@@ -9,6 +9,7 @@ You have two options to run this project:
 
 Instructions for 1:
 This project has the following dependencies that need to be installed for it to work. 
+    
     - requests
     
     - numpy 
