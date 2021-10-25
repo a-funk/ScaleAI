@@ -11,7 +11,7 @@ Then enter 'touch project/key/key.json'
 Then edit the json so it is of the form:
 \{
 
-    "api_key" : "YOUR_KEY_HERE"
+ {"api_key" : "YOUR_KEY_HERE"}
 
 \}
 
