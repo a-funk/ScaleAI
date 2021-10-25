@@ -3,8 +3,14 @@
 This tool leverages ScaleSDK to flag tasks that lack a variety of label types.  
 
 First step is to make a folder called 'key' inside of 'project' folder
+
+
 From ScaleAI directory type 'mkdir project/key' into your terminal 
+
+
 Then enter 'touch project/key/key.json'
+
+
 Then edit the json so it is of the form:
 {
     "api_key" : "YOUR_KEY_HERE"
