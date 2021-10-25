@@ -71,6 +71,7 @@ def get_task(client, task_id='5f127f6f26831d0010e985e5'):
     # Returns:
     #   task_id : task id string
     #   task    : task information dict
+    #   bool    : true if task complete, false if task not complete
     # Runtime: 
     #   O(1)
 
