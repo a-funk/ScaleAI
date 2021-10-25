@@ -10,11 +10,21 @@ import sys
 from scaleapi.tasks import TaskReviewStatus, TaskStatus
 
 
+
+def get_api_key():
+    # Input:
+    #   Nothing
+    # Returns:
+    #   api_key 
+    path = './key/key.json'
+    with open(path) as f:
+        return json.load(f)['api_key']
+
 def list_projects(client):
     # Input:
     #   client : scaleSDK client object
     # Returns:
-    #   NOTHING - prints project name
+    #   project_map : dict of projects {num : project_name}
     counter = 0
     project_map = {}
     projects = client.projects()
@@ -27,7 +37,7 @@ def list_projects(client):
     
 def select_project(project_map):
     # Input: 
-    #   None
+    #   project_map dict of all projects
     # Returns: 
     #   project_name string
     print("------------------------------------------")
@@ -169,7 +179,7 @@ def make_output(output_dict, project_name):
 #   n = number of tasks
 #   m = number of labels per task
 def main():
-    api_key="live_ed802f9607c14973a63a0b5ebefafcad" # Live one
+    api_key= get_api_key()# Live one
     client = scaleapi.ScaleClient(api_key)
     
     project_map = list_projects(client)
@@ -191,8 +201,8 @@ def main():
             return -1
         num_unique_labels = get_num_unique_labels(task=task)  # Runtime : O(m)
         num_unique_labels_sum = num_unique_labels_sum + num_unique_labels
-        task_id, value = create_dict(task_id=task_id,task=task,num_unique_labels=num_unique_labels)
-        unique_labels_dict[task_id] = value
+        task_id, num_dict = create_dict(task_id=task_id,task=task,num_unique_labels=num_unique_labels)
+        unique_labels_dict[task_id] = num_dict
     if(num_tasks!=0):
         average_unique_labels = math.ceil(num_unique_labels_sum/num_tasks)
     else:
@@ -208,13 +218,14 @@ def main():
             num_unique_labels=unique_labels_dict[task_id]['num_unique_labels'], 
             limit=average_unique_labels
         )
-    print(output_dict.keys())
-
+    # print(output_dict.keys())
+    print("-----------------------------------------------------------")
+    print("Output:")
     print("A 'True' status indicates that a task needs to be reviewed.")
     # Complexity : O(n) where n = number of tasks
     # This is also just to make pretty output and is not necessary for json out
     for task_id in tasks:
-        print(str(task_id)+" : "+str(output_dict[task_id]['flag']))
+        print("\t"+str(task_id)+" : "+str(output_dict[task_id]['flag']))
     make_output(output_dict, project_name)
 
 
