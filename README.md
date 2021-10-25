@@ -1,6 +1,6 @@
 # ScaleAI - Data Annotation Flag
-### Label Variety Check
-This tool leverages ScaleSDK to flag tasks that lack a variety of label types.  
+## Label Variety Check
+### This tool leverages ScaleSDK to flag tasks that lack a variety of label types.  
 ---
 First step is to make a folder called 'key' inside of 'project' folder
 
